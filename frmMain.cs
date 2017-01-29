@@ -35,7 +35,7 @@ namespace WeeklyTimeUtility
             #region Initialize the setting variables
 
             hoursPerDay = 8;
-            percentageChanceToIntroduceVacationDays = 25;
+            percentageChanceToIntroduceVacationDays = 10;
 
             #endregion Initialize the setting variables
 
@@ -60,6 +60,16 @@ namespace WeeklyTimeUtility
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            DataGridViewRow row = new DataGridViewRow();
+
+            dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMain.DefaultCellStyle.SelectionBackColor = dgvMain.DefaultCellStyle.BackColor;
+            dgvMain.DefaultCellStyle.SelectionForeColor = dgvMain.DefaultCellStyle.ForeColor;
+
+            dgvMain.Rows.Add(true, "02/11/2015", "08/11/2015", "38h 13m", "1h 47m", "-1h 47m", Resources.up, "5 days required");
+            dgvMain.Rows.Add(true, "02/11/2015", "08/11/2015", "38h 13m", "1h 47m", "-1h 47m", Resources.down, "5 days required");
+
+
             StreamReader sr = new StreamReader("weeks.txt");
 
             List<string> ranges = new List<string>();
@@ -143,5 +153,9 @@ namespace WeeklyTimeUtility
 
         #endregion Utility methods
 
+        private void dgvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show(e.RowIndex.ToString());
+        }
     }
 }
