@@ -65,10 +65,7 @@ namespace WeeklyTimeUtility
             dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMain.DefaultCellStyle.SelectionBackColor = dgvMain.DefaultCellStyle.BackColor;
             dgvMain.DefaultCellStyle.SelectionForeColor = dgvMain.DefaultCellStyle.ForeColor;
-
-            dgvMain.Rows.Add(true, "02/11/2015", "08/11/2015", "38h 13m", "1h 47m", "-1h 47m", Resources.up, "5 days required");
-            dgvMain.Rows.Add(true, "02/11/2015", "08/11/2015", "38h 13m", "1h 47m", "-1h 47m", Resources.down, "5 days required");
-
+            dgvMain.Columns["colEvolution"].DefaultCellStyle.NullValue = null;
 
             StreamReader sr = new StreamReader("weeks.txt");
 
@@ -84,8 +81,7 @@ namespace WeeklyTimeUtility
 
             List<WeekData> weeks = new List<WeekData>();
 
-            TimeSpan balance = TimeSpan.Zero;
-
+            TimeSpan? balance = null;
 
             string data = string.Empty;
             foreach (var range in ranges)
@@ -99,9 +95,27 @@ namespace WeeklyTimeUtility
                 var requiredDays = SubstractVacationDays();
                 var workedTime = GenerateWorkedTime(requiredDays);
 
-                WeekData wd = new WeekData(tokens[0].Trim(), tokens[1].Trim(), false, string.Empty,
+                WeekData wd = new WeekData(tokens[0].Trim(), tokens[1].Trim(), false, string.Format("{0} days required", requiredDays),
                     workedTime, balance, requiredDays);
                 wd.Compute();
+
+                Bitmap evoBitmap = null;
+                if (balance.HasValue)
+                {
+                    if (wd.Balance < balance.Value)
+                    {
+                        evoBitmap = Resources.down;
+                    }
+                    else if (wd.Balance > balance.Value)
+                    {
+                        evoBitmap = Resources.up;
+                    }
+                }
+
+                dgvMain.Rows.Add(wd.Reported, wd.StartDate, wd.EndDate, 
+                    wd.TimeSpanToString(wd.HoursWorkedThisWeek),
+                    wd.TimeSpanToString(wd.ThisWeeksBalance),
+                    wd.TimeSpanToString(wd.Balance), evoBitmap, wd.Description);
 
                 balance = new TimeSpan(wd.Balance.Hours, wd.Balance.Minutes, wd.Balance.Seconds);
                 weeks.Add(wd);

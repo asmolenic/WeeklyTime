@@ -15,7 +15,7 @@ namespace WeeklyTimeUtility
         private TimeSpan _hoursWorkedThisWeek;   // user managed - should be set in the constructor
         private TimeSpan _thisWeeksBalance;      // to be computed
         private TimeSpan _balance;               // to be computed
-        private TimeSpan _initialBalance;        // user managed - should be set in the constructor
+        private TimeSpan? _initialBalance;        // user managed - should be set in the constructor
         private int _requiredDays;               // user managed - should be set in the constructor
         private int _hoursPerDay;                // user managed - should be set in the constructor
 
@@ -29,7 +29,7 @@ namespace WeeklyTimeUtility
         }
 
         public WeekData(string startDate, string endDate, bool reported, string description,
-            TimeSpan hoursWorkedThisWeek, TimeSpan initialBalance, 
+            TimeSpan hoursWorkedThisWeek, TimeSpan? initialBalance, 
             int requiredDays = DEFAULT_REQUIRED_DAYS, int hoursPerDay = DEFAULT_HOURS_PER_DAY)
         {
             StartDate = startDate;
@@ -37,7 +37,7 @@ namespace WeeklyTimeUtility
             Reported = reported;
             Description = description;
             HoursWorkedThisWeek = hoursWorkedThisWeek;
-            InitialBalance = initialBalance;
+            InitialBalance = initialBalance.HasValue ? initialBalance.Value : TimeSpan.Zero;
 
             RequiredDays = requiredDays;
             HoursPerDay = hoursPerDay;
@@ -68,7 +68,7 @@ namespace WeeklyTimeUtility
             TimeSpan thisWeeksTarget = new TimeSpan(RequiredDays * HoursPerDay, 0, 0);
 
             ThisWeeksBalance = HoursWorkedThisWeek.Subtract(thisWeeksTarget);
-            Balance = InitialBalance.Add(ThisWeeksBalance);
+            Balance = InitialBalance.Value.Add(ThisWeeksBalance);
         }
 
         public override string ToString()
@@ -81,7 +81,7 @@ namespace WeeklyTimeUtility
             return output + Environment.NewLine;
         }
 
-        private string TimeSpanToString(TimeSpan input)
+        public string TimeSpanToString(TimeSpan input)
         {
             //string output = string.Empty;
 
@@ -199,7 +199,7 @@ namespace WeeklyTimeUtility
             }
         }
 
-        public TimeSpan InitialBalance
+        public TimeSpan? InitialBalance
         {
             get
             {

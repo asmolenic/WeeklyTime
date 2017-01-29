@@ -30,14 +30,14 @@
         {
             this.lblOutput = new System.Windows.Forms.Label();
             this.dgvMain = new System.Windows.Forms.DataGridView();
-            this.colReported = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colWeekStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeekEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWorkedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeekBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEvolution = new System.Windows.Forms.DataGridViewImageColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEvolution = new System.Windows.Forms.DataGridViewImageColumn();
+            this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeekBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWorkedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeekEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeekStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReported = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,40 +73,18 @@
             this.dgvMain.TabIndex = 1;
             this.dgvMain.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMain_CellDoubleClick);
             // 
-            // colReported
+            // colDescription
             // 
-            this.colReported.HeaderText = "Reported";
-            this.colReported.Name = "colReported";
-            this.colReported.ReadOnly = true;
-            this.colReported.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDescription.HeaderText = "Description";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            this.colDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // colWeekStartDate
+            // colEvolution
             // 
-            this.colWeekStartDate.HeaderText = "Week Start Date";
-            this.colWeekStartDate.Name = "colWeekStartDate";
-            this.colWeekStartDate.ReadOnly = true;
-            this.colWeekStartDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colWeekEndDate
-            // 
-            this.colWeekEndDate.HeaderText = "Week End Date";
-            this.colWeekEndDate.Name = "colWeekEndDate";
-            this.colWeekEndDate.ReadOnly = true;
-            this.colWeekEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colWorkedTime
-            // 
-            this.colWorkedTime.HeaderText = "Worked Time";
-            this.colWorkedTime.Name = "colWorkedTime";
-            this.colWorkedTime.ReadOnly = true;
-            this.colWorkedTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colWeekBalance
-            // 
-            this.colWeekBalance.HeaderText = "Week Balance";
-            this.colWeekBalance.Name = "colWeekBalance";
-            this.colWeekBalance.ReadOnly = true;
-            this.colWeekBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colEvolution.HeaderText = "Evolution";
+            this.colEvolution.Name = "colEvolution";
+            this.colEvolution.ReadOnly = true;
             // 
             // colBalance
             // 
@@ -115,18 +93,40 @@
             this.colBalance.ReadOnly = true;
             this.colBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // colEvolution
+            // colWeekBalance
             // 
-            this.colEvolution.HeaderText = "Evolution";
-            this.colEvolution.Name = "colEvolution";
-            this.colEvolution.ReadOnly = true;
+            this.colWeekBalance.HeaderText = "Week Balance";
+            this.colWeekBalance.Name = "colWeekBalance";
+            this.colWeekBalance.ReadOnly = true;
+            this.colWeekBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // colDescription
+            // colWorkedTime
             // 
-            this.colDescription.HeaderText = "Description";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            this.colDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colWorkedTime.HeaderText = "Worked Time";
+            this.colWorkedTime.Name = "colWorkedTime";
+            this.colWorkedTime.ReadOnly = true;
+            this.colWorkedTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colWeekEndDate
+            // 
+            this.colWeekEndDate.HeaderText = "Week End Date";
+            this.colWeekEndDate.Name = "colWeekEndDate";
+            this.colWeekEndDate.ReadOnly = true;
+            this.colWeekEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colWeekStartDate
+            // 
+            this.colWeekStartDate.HeaderText = "Week Start Date";
+            this.colWeekStartDate.Name = "colWeekStartDate";
+            this.colWeekStartDate.ReadOnly = true;
+            this.colWeekStartDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // colReported
+            // 
+            this.colReported.HeaderText = "Reported";
+            this.colReported.Name = "colReported";
+            this.colReported.ReadOnly = true;
+            this.colReported.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // frmMain
             // 
