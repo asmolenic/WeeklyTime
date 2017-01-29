@@ -14,13 +14,48 @@ namespace WeeklyTimeUtility
 {
     public partial class frmMain : Form
     {
-        static Random _random = new Random();
+        #region Settings
 
-        private int hoursPerDay = 8;
+        private int hoursPerDay;
+        private int percentageChanceToIntroduceVacationDays;
+
+        #endregion Settings
+
+        #region Utility variables
+
+        static Random _random = new Random();
+        private List<bool> vacationDaysRoulette;
+
+        #endregion Utility variables
 
         public frmMain()
         {
             InitializeComponent();
+
+            #region Initialize the setting variables
+
+            hoursPerDay = 8;
+            percentageChanceToIntroduceVacationDays = 5;
+
+            #endregion Initialize the setting variables
+
+            #region Initialize the vacation days roulette
+
+            vacationDaysRoulette = new List<bool>();
+
+            for (int i = 0; i < 100 - percentageChanceToIntroduceVacationDays; i++)
+            {
+                vacationDaysRoulette.Add(false);
+            }
+
+            for (int i = 0; i < percentageChanceToIntroduceVacationDays; i++)
+            {
+                vacationDaysRoulette.Add(true);
+            }
+
+            Shuffle<bool>(vacationDaysRoulette);
+
+            #endregion Initialize the vacation days roulette
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -79,23 +114,7 @@ namespace WeeklyTimeUtility
 
         private int SubstractVacationDays()
         {
-            int p = 5; // 5% chances to introduce vacation days
-
-            List<bool> roulette = new List<bool>();
-
-            for (int i = 0; i < 100 - p; i++)
-            {
-                roulette.Add(false);
-            }
-
-            for (int i = 0; i < p; i++)
-            {
-                roulette.Add(true);
-            }
-
-            Shuffle<bool>(roulette);
-
-            bool shouldAddVacationDays = roulette[_random.Next(0, roulette.Count)];
+            bool shouldAddVacationDays = vacationDaysRoulette[_random.Next(0, vacationDaysRoulette.Count)];
 
             if (shouldAddVacationDays)
             {
@@ -104,6 +123,9 @@ namespace WeeklyTimeUtility
 
             return 5;
         }
+
+
+        #region Utility methods
 
         static void Shuffle<T>(List<T> deck)
         {
@@ -118,6 +140,8 @@ namespace WeeklyTimeUtility
                 deck[i] = t;
             }
         }
+
+        #endregion Utility methods
 
     }
 }
