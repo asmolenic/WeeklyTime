@@ -35,7 +35,7 @@ namespace WeeklyTimeUtility
             #region Initialize the setting variables
 
             hoursPerDay = 8;
-            percentageChanceToIntroduceVacationDays = 5;
+            percentageChanceToIntroduceVacationDays = 25;
 
             #endregion Initialize the setting variables
 
@@ -106,10 +106,10 @@ namespace WeeklyTimeUtility
 
         private TimeSpan GenerateWorkedTime(int requiredDays)
         {
-            var secondsRequired = hoursPerDay * requiredDays * 60 * 60;
-            var variance = secondsRequired / 10;
-            var secondsWorked = _random.Next(secondsRequired - variance, secondsRequired + variance);
-            return new TimeSpan(0, 0, secondsWorked);
+            var minutesRequired = hoursPerDay * requiredDays * 60;
+            var variance = minutesRequired / 10;
+            var minutesWorked = _random.Next(minutesRequired - variance, minutesRequired + variance);
+            return new TimeSpan(0, minutesWorked, 0);
         }
 
         private int SubstractVacationDays()

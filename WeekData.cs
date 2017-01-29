@@ -8,39 +8,39 @@ namespace WeeklyTimeUtility
 {
     public class WeekData
     {
-        private string startDate;               // prefilled - labeling puprose only
-        private string endDate;                 // prefilled - labeling puprose only
-        private bool reported;                  // user managed - should be set in the constructor
-        private string description;             // user managed - should be set in the constructor
-        private TimeSpan hoursWorkedThisWeek;   // user managed - should be set in the constructor
-        private TimeSpan thisWeeksBalance;      // to be computed
-        private TimeSpan balance;               // to be computed
-        private TimeSpan initialBalance;        // user managed - should be set in the constructor
-        private int requiredDays;               // user managed - should be set in the constructor
-        private int hoursPerDay;                // user managed - should be set in the constructor
+        private string _startDate;               // prefilled - labeling puprose only
+        private string _endDate;                 // prefilled - labeling puprose only
+        private bool _reported;                  // user managed - should be set in the constructor
+        private string _description;             // user managed - should be set in the constructor
+        private TimeSpan _hoursWorkedThisWeek;   // user managed - should be set in the constructor
+        private TimeSpan _thisWeeksBalance;      // to be computed
+        private TimeSpan _balance;               // to be computed
+        private TimeSpan _initialBalance;        // user managed - should be set in the constructor
+        private int _requiredDays;               // user managed - should be set in the constructor
+        private int _hoursPerDay;                // user managed - should be set in the constructor
 
         //default values
-        private const int defaultRequiredDays = 5;
-        private const int defaultHoursPerDay = 8;
+        private const int DEFAULT_REQUIRED_DAYS = 5;
+        private const int DEFAULT_HOURS_PER_DAY = 8;
 
         // default constructor
         public WeekData()
         {
         }
 
-        public WeekData(string _startDate, string _endDate, bool _reported, string _description,
-            TimeSpan _hoursWorkedThisWeek, TimeSpan _initialBalance, 
-            int _requiredDays = defaultRequiredDays, int _hoursPerDay = defaultHoursPerDay)
+        public WeekData(string startDate, string endDate, bool reported, string description,
+            TimeSpan hoursWorkedThisWeek, TimeSpan initialBalance, 
+            int requiredDays = DEFAULT_REQUIRED_DAYS, int hoursPerDay = DEFAULT_HOURS_PER_DAY)
         {
-            StartDate = _startDate;
-            EndDate = _endDate;
-            Reported = _reported;
-            Description = _description;
-            HoursWorkedThisWeek = _hoursWorkedThisWeek;
-            InitialBalance = _initialBalance;
+            StartDate = startDate;
+            EndDate = endDate;
+            Reported = reported;
+            Description = description;
+            HoursWorkedThisWeek = hoursWorkedThisWeek;
+            InitialBalance = initialBalance;
 
-            RequiredDays = _requiredDays;
-            HoursPerDay = _hoursPerDay;
+            RequiredDays = requiredDays;
+            HoursPerDay = hoursPerDay;
 
             Compute();
         }
@@ -74,8 +74,8 @@ namespace WeeklyTimeUtility
         public override string ToString()
         {
             string output = string.Format("[{0}]  {1}-{2}  {3}  {4}  {5}  {6}",
-                reported ? "X" : " ", StartDate, EndDate, (HoursWorkedThisWeek),
-                (ThisWeeksBalance), (Balance), 
+                _reported ? "X" : " ", StartDate, EndDate, TimeSpanToString(HoursWorkedThisWeek),
+                TimeSpanToString(ThisWeeksBalance), TimeSpanToString(Balance), 
                 string.IsNullOrWhiteSpace(Description) ? string.Format("{0} days required", RequiredDays) : Description);
             string x = TimeSpanToString(HoursWorkedThisWeek);
             return output + Environment.NewLine;
@@ -83,25 +83,28 @@ namespace WeeklyTimeUtility
 
         private string TimeSpanToString(TimeSpan input)
         {
-            string output = string.Empty;
+            //string output = string.Empty;
 
-            int totalHours = (int)Math.Floor(input.TotalHours);
+            //int totalHours = (int)Math.Floor(input.TotalHours);
+            //var remaining = input.Subtract(new TimeSpan(totalHours, 0, 0));
+            //int minutes = (int)Math.Floor(remaining.TotalMinutes);
+            int totalHours = (int)input.TotalHours;
             var remaining = input.Subtract(new TimeSpan(totalHours, 0, 0));
-            int minutes = (int)Math.Floor(remaining.TotalMinutes);
+            int minutes = Math.Abs(input.Minutes);
 
-            return string.Format("{0,4}H {1:D2}M", totalHours, minutes);
+            return string.Format("{2}{0:D2}H {1:D2}M", Math.Abs(totalHours), minutes, input >= TimeSpan.Zero ? " " : "-");
         }
 
         public string StartDate
         {
             get
             {
-                return startDate;
+                return _startDate;
             }
 
             set
             {
-                startDate = value;
+                _startDate = value;
             }
         }
 
@@ -109,12 +112,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return endDate;
+                return _endDate;
             }
 
             set
             {
-                endDate = value;
+                _endDate = value;
             }
         }
 
@@ -122,12 +125,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return reported;
+                return _reported;
             }
 
             set
             {
-                reported = value;
+                _reported = value;
             }
         }
 
@@ -135,12 +138,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return thisWeeksBalance;
+                return _thisWeeksBalance;
             }
 
             set
             {
-                thisWeeksBalance = value;
+                _thisWeeksBalance = value;
             }
         }
 
@@ -148,12 +151,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return balance;
+                return _balance;
             }
 
             set
             {
-                balance = value;
+                _balance = value;
             }
         }
 
@@ -161,12 +164,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return requiredDays;
+                return _requiredDays;
             }
 
             set
             {
-                requiredDays = value;
+                _requiredDays = value;
             }
         }
 
@@ -174,12 +177,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return hoursWorkedThisWeek;
+                return _hoursWorkedThisWeek;
             }
 
             set
             {
-                hoursWorkedThisWeek = value;
+                _hoursWorkedThisWeek = value;
             }
         }
 
@@ -187,12 +190,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return description;
+                return _description;
             }
 
             set
             {
-                description = value;
+                _description = value;
             }
         }
 
@@ -200,12 +203,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return initialBalance;
+                return _initialBalance;
             }
 
             set
             {
-                initialBalance = value;
+                _initialBalance = value;
             }
         }
 
@@ -213,12 +216,12 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return hoursPerDay;
+                return _hoursPerDay;
             }
 
             set
             {
-                hoursPerDay = value;
+                _hoursPerDay = value;
             }
         }
     }
