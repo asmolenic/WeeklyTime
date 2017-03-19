@@ -63,8 +63,8 @@ namespace WeeklyTimeUtility
             DataGridViewRow row = new DataGridViewRow();
 
             dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMain.DefaultCellStyle.SelectionBackColor = dgvMain.DefaultCellStyle.BackColor;
-            dgvMain.DefaultCellStyle.SelectionForeColor = dgvMain.DefaultCellStyle.ForeColor;
+            //dgvMain.DefaultCellStyle.SelectionBackColor = dgvMain.DefaultCellStyle.BackColor;
+            //dgvMain.DefaultCellStyle.SelectionForeColor = dgvMain.DefaultCellStyle.ForeColor;
             dgvMain.Columns["colEvolution"].DefaultCellStyle.NullValue = null;
 
             StreamReader sr = new StreamReader("weeks.txt");
@@ -126,6 +126,9 @@ namespace WeeklyTimeUtility
 
             var str = JsonConvert.SerializeObject(weeks);
             // MessageBox.Show(str);
+
+            dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            
         }
 
         private TimeSpan GenerateWorkedTime(int requiredDays)
@@ -170,6 +173,12 @@ namespace WeeklyTimeUtility
         private void dgvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             MessageBox.Show(e.RowIndex.ToString());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmWeekEdit weekEditForm = new frmWeekEdit();
+            weekEditForm.Show();
         }
     }
 }

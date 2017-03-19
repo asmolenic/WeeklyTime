@@ -15,9 +15,11 @@ namespace WeeklyTimeUtility
         private TimeSpan _hoursWorkedThisWeek;   // user managed - should be set in the constructor
         private TimeSpan _thisWeeksBalance;      // to be computed
         private TimeSpan _balance;               // to be computed
-        private TimeSpan? _initialBalance;        // user managed - should be set in the constructor
+        private TimeSpan? _initialBalance;       // user managed - should be set in the constructor
         private int _requiredDays;               // user managed - should be set in the constructor
         private int _hoursPerDay;                // user managed - should be set in the constructor
+
+        public List<int> vDays;
 
         //default values
         private const int DEFAULT_REQUIRED_DAYS = 5;
@@ -26,6 +28,7 @@ namespace WeeklyTimeUtility
         // default constructor
         public WeekData()
         {
+            vDays = new List<int>() { 0, 0, 0 };
         }
 
         public WeekData(string startDate, string endDate, bool reported, string description,
@@ -41,6 +44,8 @@ namespace WeeklyTimeUtility
 
             RequiredDays = requiredDays;
             HoursPerDay = hoursPerDay;
+
+            vDays = new List<int>() { 0, 0, 0 };
 
             Compute();
         }
@@ -61,6 +66,8 @@ namespace WeeklyTimeUtility
                 RequiredDays = obj.RequiredDays;
                 HoursPerDay = obj.HoursPerDay;
             }
+
+            vDays = new List<int>() { 0, 0, 0 };
         }
 
         public void Compute()
