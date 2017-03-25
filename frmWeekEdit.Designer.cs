@@ -28,21 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grpDaysRem = new System.Windows.Forms.GroupBox();
-            this.lblOut = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbUnpaid = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbStatutory = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbState = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblWeekIndex = new System.Windows.Forms.Label();
+            this.lblWeekInterval = new System.Windows.Forms.Label();
+            this.lblDaysReq = new System.Windows.Forms.Label();
+            this.lblDaysReqVal = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.grpDaysRem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // grpDaysRem
             // 
-            this.grpDaysRem.Controls.Add(this.lblOut);
             this.grpDaysRem.Controls.Add(this.label3);
             this.grpDaysRem.Controls.Add(this.cmbUnpaid);
             this.grpDaysRem.Controls.Add(this.label2);
@@ -55,15 +60,6 @@
             this.grpDaysRem.TabIndex = 0;
             this.grpDaysRem.TabStop = false;
             this.grpDaysRem.Text = " Vacation Days ";
-            // 
-            // lblOut
-            // 
-            this.lblOut.AutoSize = true;
-            this.lblOut.Location = new System.Drawing.Point(310, 42);
-            this.lblOut.Name = "lblOut";
-            this.lblOut.Size = new System.Drawing.Size(34, 13);
-            this.lblOut.TabIndex = 6;
-            this.lblOut.Text = "lblOut";
             // 
             // label3
             // 
@@ -116,27 +112,80 @@
             this.cmbState.Size = new System.Drawing.Size(68, 21);
             this.cmbState.TabIndex = 0;
             // 
-            // label4
+            // lblWeekIndex
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(102, 66);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "5      {1,0,2}";
+            this.lblWeekIndex.AutoSize = true;
+            this.lblWeekIndex.Font = new System.Drawing.Font("Open Sans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWeekIndex.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.lblWeekIndex.Location = new System.Drawing.Point(12, 9);
+            this.lblWeekIndex.Name = "lblWeekIndex";
+            this.lblWeekIndex.Size = new System.Drawing.Size(98, 33);
+            this.lblWeekIndex.TabIndex = 1;
+            this.lblWeekIndex.Text = "Week #";
+            this.lblWeekIndex.Click += new System.EventHandler(this.lblWeekIndex_Click);
+            // 
+            // lblWeekInterval
+            // 
+            this.lblWeekInterval.AutoSize = true;
+            this.lblWeekInterval.Font = new System.Drawing.Font("Open Sans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWeekInterval.Location = new System.Drawing.Point(140, 9);
+            this.lblWeekInterval.Name = "lblWeekInterval";
+            this.lblWeekInterval.Size = new System.Drawing.Size(98, 33);
+            this.lblWeekInterval.TabIndex = 2;
+            this.lblWeekInterval.Text = "interval";
+            // 
+            // lblDaysReq
+            // 
+            this.lblDaysReq.AutoSize = true;
+            this.lblDaysReq.Font = new System.Drawing.Font("Open Sans", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDaysReq.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblDaysReq.Location = new System.Drawing.Point(12, 65);
+            this.lblDaysReq.Name = "lblDaysReq";
+            this.lblDaysReq.Size = new System.Drawing.Size(145, 26);
+            this.lblDaysReq.TabIndex = 3;
+            this.lblDaysReq.Text = "Days required:";
+            this.toolTip1.SetToolTip(this.lblDaysReq, "Adjustable via the Vacation Days section");
+            // 
+            // lblDaysReqVal
+            // 
+            this.lblDaysReqVal.AutoSize = true;
+            this.lblDaysReqVal.Font = new System.Drawing.Font("Open Sans", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDaysReqVal.Location = new System.Drawing.Point(163, 65);
+            this.lblDaysReqVal.Name = "lblDaysReqVal";
+            this.lblDaysReqVal.Size = new System.Drawing.Size(23, 26);
+            this.lblDaysReqVal.TabIndex = 4;
+            this.lblDaysReqVal.Text = "5";
+            this.toolTip1.SetToolTip(this.lblDaysReqVal, "Adjustable via the Vacation Days section");
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(36, 195);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 5;
             // 
             // frmWeekEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 695);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.lblDaysReqVal);
+            this.Controls.Add(this.lblDaysReq);
+            this.Controls.Add(this.lblWeekInterval);
+            this.Controls.Add(this.lblWeekIndex);
             this.Controls.Add(this.grpDaysRem);
             this.Name = "frmWeekEdit";
-            this.Text = "frmWeekEdit";
+            this.Text = "Week Edit";
             this.Load += new System.EventHandler(this.frmWeekEdit_Load);
             this.grpDaysRem.ResumeLayout(false);
             this.grpDaysRem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,7 +200,11 @@
         private System.Windows.Forms.ComboBox cmbStatutory;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbState;
-        private System.Windows.Forms.Label lblOut;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblWeekIndex;
+        public System.Windows.Forms.Label lblWeekInterval;
+        private System.Windows.Forms.Label lblDaysReq;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lblDaysReqVal;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

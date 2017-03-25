@@ -16,10 +16,9 @@ namespace WeeklyTimeUtility
         private TimeSpan _thisWeeksBalance;      // to be computed
         private TimeSpan _balance;               // to be computed
         private TimeSpan? _initialBalance;       // user managed - should be set in the constructor
-        private int _requiredDays;               // user managed - should be set in the constructor
-        private int _hoursPerDay;                // user managed - should be set in the constructor
 
-        public List<int> vDays;
+        private int _hoursPerDay;                // user managed - should be set in the constructor
+        public List<int> vDays;                  // user managed - should be set in the constructor
 
         //default values
         private const int DEFAULT_REQUIRED_DAYS = 5;
@@ -32,7 +31,7 @@ namespace WeeklyTimeUtility
         }
 
         public WeekData(string startDate, string endDate, bool reported, string description,
-            TimeSpan hoursWorkedThisWeek, TimeSpan? initialBalance, 
+            TimeSpan hoursWorkedThisWeek, TimeSpan? initialBalance, List<int> vacDays,
             int requiredDays = DEFAULT_REQUIRED_DAYS, int hoursPerDay = DEFAULT_HOURS_PER_DAY)
         {
             StartDate = startDate;
@@ -41,11 +40,9 @@ namespace WeeklyTimeUtility
             Description = description;
             HoursWorkedThisWeek = hoursWorkedThisWeek;
             InitialBalance = initialBalance.HasValue ? initialBalance.Value : TimeSpan.Zero;
-
-            RequiredDays = requiredDays;
             HoursPerDay = hoursPerDay;
 
-            vDays = new List<int>() { 0, 0, 0 };
+            vDays = vacDays;
 
             Compute();
         }
@@ -63,7 +60,7 @@ namespace WeeklyTimeUtility
                 ThisWeeksBalance = obj.ThisWeeksBalance;
                 Balance = obj.Balance;
                 InitialBalance = obj.InitialBalance;
-                RequiredDays = obj.RequiredDays;
+                vDays = obj.vDays;
                 HoursPerDay = obj.HoursPerDay;
             }
 
@@ -100,6 +97,11 @@ namespace WeeklyTimeUtility
             int minutes = Math.Abs(input.Minutes);
 
             return string.Format("{2}{0:D2}H {1:D2}M", Math.Abs(totalHours), minutes, input >= TimeSpan.Zero ? " " : "-");
+        }
+
+        public string ReportedString()
+        {
+            return Reported ? "Yes" : string.Empty;
         }
 
         public string StartDate
@@ -171,12 +173,7 @@ namespace WeeklyTimeUtility
         {
             get
             {
-                return _requiredDays;
-            }
-
-            set
-            {
-                _requiredDays = value;
+                return vDays.Sum();
             }
         }
 

@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblOutput = new System.Windows.Forms.Label();
             this.dgvMain = new System.Windows.Forms.DataGridView();
-            this.colReported = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colReported = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeekStartDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeekEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWorkedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWeekBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEvolution = new System.Windows.Forms.DataGridViewImageColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,86 +67,116 @@
             this.colWorkedTime,
             this.colWeekBalance,
             this.colBalance,
-            this.colEvolution,
-            this.colDescription});
+            this.colDescription,
+            this.colEdit});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Open Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMain.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMain.Location = new System.Drawing.Point(0, 0);
+            this.dgvMain.MultiSelect = false;
             this.dgvMain.Name = "dgvMain";
+            this.dgvMain.ReadOnly = true;
+            this.dgvMain.RowHeadersVisible = false;
+            this.dgvMain.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMain.Size = new System.Drawing.Size(1037, 734);
             this.dgvMain.TabIndex = 1;
+            this.dgvMain.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMain_CellContentClick);
             this.dgvMain.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMain_CellDoubleClick);
             // 
             // colReported
             // 
+            this.colReported.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colReported.HeaderText = "Reported";
             this.colReported.Name = "colReported";
             this.colReported.ReadOnly = true;
-            this.colReported.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colReported.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colReported.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colReported.Width = 57;
             // 
             // colWeekStartDate
             // 
-            this.colWeekStartDate.HeaderText = "Week Start Date";
+            this.colWeekStartDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colWeekStartDate.HeaderText = "Week Start";
             this.colWeekStartDate.Name = "colWeekStartDate";
             this.colWeekStartDate.ReadOnly = true;
+            this.colWeekStartDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.colWeekStartDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colWeekStartDate.Width = 67;
             // 
             // colWeekEndDate
             // 
-            this.colWeekEndDate.HeaderText = "Week End Date";
+            this.colWeekEndDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colWeekEndDate.HeaderText = "Week End";
             this.colWeekEndDate.Name = "colWeekEndDate";
             this.colWeekEndDate.ReadOnly = true;
+            this.colWeekEndDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.colWeekEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colWeekEndDate.Width = 64;
             // 
             // colWorkedTime
             // 
+            this.colWorkedTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.colWorkedTime.HeaderText = "Worked Time";
             this.colWorkedTime.Name = "colWorkedTime";
             this.colWorkedTime.ReadOnly = true;
+            this.colWorkedTime.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.colWorkedTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colWorkedTime.Width = 77;
             // 
             // colWeekBalance
             // 
+            this.colWeekBalance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colWeekBalance.DefaultCellStyle = dataGridViewCellStyle4;
             this.colWeekBalance.HeaderText = "Week Balance";
             this.colWeekBalance.Name = "colWeekBalance";
             this.colWeekBalance.ReadOnly = true;
+            this.colWeekBalance.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.colWeekBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colWeekBalance.Width = 85;
             // 
             // colBalance
             // 
+            this.colBalance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colBalance.HeaderText = "Balance";
             this.colBalance.Name = "colBalance";
             this.colBalance.ReadOnly = true;
+            this.colBalance.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.colBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // colEvolution
-            // 
-            this.colEvolution.HeaderText = "Evolution";
-            this.colEvolution.Name = "colEvolution";
-            this.colEvolution.ReadOnly = true;
+            this.colBalance.Width = 52;
             // 
             // colDescription
             // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colDescription.DefaultCellStyle = dataGridViewCellStyle5;
             this.colDescription.HeaderText = "Description";
             this.colDescription.Name = "colDescription";
             this.colDescription.ReadOnly = true;
+            this.colDescription.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.colDescription.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // button1
+            // colEdit
             // 
-            this.button1.Location = new System.Drawing.Point(917, 39);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.colEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colEdit.HeaderText = "";
+            this.colEdit.Name = "colEdit";
+            this.colEdit.ReadOnly = true;
+            this.colEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.colEdit.Width = 50;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1037, 734);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvMain);
             this.Controls.Add(this.lblOutput);
             this.Name = "frmMain";
@@ -160,15 +192,14 @@
 
         private System.Windows.Forms.Label lblOutput;
         private System.Windows.Forms.DataGridView dgvMain;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colReported;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReported;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeekStartDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeekEndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWorkedTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeekBalance;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBalance;
-        private System.Windows.Forms.DataGridViewImageColumn colEvolution;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewButtonColumn colEdit;
     }
 }
 

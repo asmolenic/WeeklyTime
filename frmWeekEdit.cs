@@ -14,13 +14,20 @@ namespace WeeklyTimeUtility
     {
         public WeekData week;
 
+        private int index;
         private readonly List<ComboBox> _cmbsDays = null;
 
         public frmWeekEdit()
         {
+            InitializeComponent(); 
+        }
+
+        public frmWeekEdit(WeekData wd, int i)
+        {
             InitializeComponent();
-            week = new WeekData();
-            week.RequiredDays = 5;
+
+            week = wd;
+            index = i;
 
             _cmbsDays = new[] { cmbState, cmbStatutory, cmbUnpaid }.ToList();
             _cmbsDays.ForEach(cmb => cmb.SelectedIndexChanged += combo_SelectedIndexChanged);
@@ -28,11 +35,12 @@ namespace WeeklyTimeUtility
 
         private void frmWeekEdit_Load(object sender, EventArgs e)
         {
-
-            week.vDays = new List<int>() { 1, 1, 1 };
-
-            _cmbsDays.ForEach(cmb => initializeCombo(cmb, week.vDays[_cmbsDays.IndexOf(cmbState)]));
+            _cmbsDays.ForEach(cmb => initializeCombo(cmb, week.vDays[_cmbsDays.IndexOf(cmb)]));
             _cmbsDays.ForEach(cmb => adjustCombo(cmb));
+
+            lblWeekIndex.Text += index;
+            lblWeekInterval.Text = string.Format("{0} - {1}", week.StartDate, week.EndDate);
+            lblDaysReqVal.Text = week.RequiredDays.ToString();
         }
 
         private void initializeCombo(ComboBox combo, int days)
@@ -55,7 +63,7 @@ namespace WeeklyTimeUtility
                 cmb.Items.RemoveAt(i);
             }
 
-            for (int i = 1; i <= RequiredDays; i++)
+            for (int i = 1; i <= MissingDays; i++)
             {
                 cmb.Items.Add(cmb.Items.Count);
             }
@@ -65,9 +73,7 @@ namespace WeeklyTimeUtility
         {
             _cmbsDays.ForEach(cmb => adjustCombo(cmb));
 
-            week.RequiredDays = RequiredDays;
-
-            lblOut.Text = week.RequiredDays.ToString();
+            lblDaysReqVal.Text = MissingDays.ToString();
         }
 
         private int VDaysSum
@@ -75,9 +81,14 @@ namespace WeeklyTimeUtility
             get { return _cmbsDays.Sum(cmb => cmb.SelectedIndex); }
         }
 
-        private int RequiredDays
+        private int MissingDays
         {
             get { return 5 - VDaysSum; }
+        }
+
+        private void lblWeekIndex_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

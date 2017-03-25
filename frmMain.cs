@@ -60,12 +60,12 @@ namespace WeeklyTimeUtility
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            DataGridViewRow row = new DataGridViewRow();
+            // DataGridViewRow row = new DataGridViewRow();
 
-            dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // dgvMain.Columns[3]
             //dgvMain.DefaultCellStyle.SelectionBackColor = dgvMain.DefaultCellStyle.BackColor;
             //dgvMain.DefaultCellStyle.SelectionForeColor = dgvMain.DefaultCellStyle.ForeColor;
-            dgvMain.Columns["colEvolution"].DefaultCellStyle.NullValue = null;
 
             StreamReader sr = new StreamReader("weeks.txt");
 
@@ -96,26 +96,17 @@ namespace WeeklyTimeUtility
                 var workedTime = GenerateWorkedTime(requiredDays);
 
                 WeekData wd = new WeekData(tokens[0].Trim(), tokens[1].Trim(), false, string.Format("{0} days required", requiredDays),
-                    workedTime, balance, requiredDays);
+                    workedTime, balance, new List<int>() { 0, requiredDays, 0}, requiredDays);
                 wd.Compute();
 
-                Bitmap evoBitmap = null;
-                if (balance.HasValue)
-                {
-                    if (wd.Balance < balance.Value)
-                    {
-                        evoBitmap = Resources.down;
-                    }
-                    else if (wd.Balance > balance.Value)
-                    {
-                        evoBitmap = Resources.up;
-                    }
-                }
-
-                dgvMain.Rows.Add(wd.Reported, wd.StartDate, wd.EndDate, 
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(dgvMain, wd.ReportedString(), wd.StartDate, wd.EndDate,
                     wd.TimeSpanToString(wd.HoursWorkedThisWeek),
                     wd.TimeSpanToString(wd.ThisWeeksBalance),
-                    wd.TimeSpanToString(wd.Balance), evoBitmap, wd.Description);
+                    wd.TimeSpanToString(wd.Balance), wd.Description, "Edit");
+                row.Tag = wd;
+
+                dgvMain.Rows.Add(row);
 
                 balance = new TimeSpan(wd.Balance.Hours, wd.Balance.Minutes, wd.Balance.Seconds);
                 weeks.Add(wd);
@@ -170,14 +161,28 @@ namespace WeeklyTimeUtility
 
         #endregion Utility methods
 
+
         private void dgvMain_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show(e.RowIndex.ToString());
+            if (e.RowIndex >= 0)
+            {
+                launchWeekEditForm(dgvMain.Rows[e.RowIndex].Tag as WeekData, e.RowIndex);
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void dgvMain_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmWeekEdit weekEditForm = new frmWeekEdit();
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                launchWeekEditForm(dgvMain.Rows[e.RowIndex].Tag as WeekData, e.RowIndex);
+            }
+        }
+
+        private void launchWeekEditForm(WeekData wd, int index)
+        {
+            frmWeekEdit weekEditForm = new frmWeekEdit(wd, index + 1);
             weekEditForm.Show();
         }
     }

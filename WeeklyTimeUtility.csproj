@@ -108,7 +108,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="up.jpg" />
     <None Include="down.jpg" />
     <Content Include="weeks.txt" />
   </ItemGroup>
